@@ -1,0 +1,63 @@
+package controllers
+
+import (
+	"github.com/revel/revel"
+)
+
+type App struct {
+	*revel.Controller
+}
+func (c App) Index() revel.Result {
+	return c.Render()
+}
+func (c App) Cliente() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="cliente"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) HistoricoMigraciones() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Historico migraciones"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) EstadisticaMigraciones() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Estadistica migraciones"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+
+
+func (c App) EstadisticaClientes() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Estadistica de clientes"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) PeriocidadMigraciones() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Periocidad de migraciones"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) ExclusionFuentes() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Exclusion de fuentes"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) AsociacionFuentes() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Asociacion de fuentes"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}

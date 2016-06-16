@@ -1,0 +1,15 @@
+sudo systemctl status mongodb
+
+Port 80 NAT 8090
+IPPUB: 177.68.74.155:8090
+
+Port 22
+User: superacesso
+password: super1300
+IPPUB: 177.68.74.155
+
+-----------------------------confihuracion mongo---------------------------------------------------------
+creamos carpeta para la bd
+sudo mkdir -p /data/db
+configuramos para que sea la que esta por defecto
+------------------------------configuracion revel------------------------------------------------------------

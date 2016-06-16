@@ -1,0 +1,151 @@
+package controllers
+
+import (
+	"log"
+    "gopkg.in/mgo.v2"
+    "gopkg.in/mgo.v2/bson"
+	"github.com/revel/revel"
+	"/app/modules"
+)
+
+type App struct {
+	*revel.Controller
+	mongo.Mongo
+}
+
+func (c App) Index() revel.Result {
+	return c.Render()
+}
+
+func (c App) ValidarUsuario(inputUsuario string,inputPassword string) revel.Result {
+    c.Validation.Required(inputUsuario).Message("Ingrese el nombre de usuario!")
+	c.Validation.Required(inputPassword).Message("Ingrese la calve del usuario!")
+    if c.Validation.HasErrors() {
+        c.Validation.Keep()
+        c.FlashParams()
+        return c.Redirect(App.Index)
+    }
+	session, err := mgo.Dial("192.168.1.34")
+	if err != nil {
+			panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	bd := session.DB("total_acceso").C("usuarios")
+	result := Usuario{}
+	err = bd.Find(bson.M{"log_usuario": inputUsuario,"pwd_usuario":inputPassword}).One(&result)
+	if err != nil {
+			log.Fatal(err)
+	}
+	var nombre,opcion_seleccionada string
+	nombre =result.Nombre
+	c.Session["UserName"] = result.Nombre
+	c.Session["LogName"] = result.Log_usuario
+    c.Session.SetNoExpiration()
+	if(nombre==""){
+		return c.Redirect(App.Index)
+	}
+	opcion_seleccionada="principal"
+    return c.Render(nombre,opcion_seleccionada)
+}
+type Clientes struct {
+	ID     bson.ObjectId `bson:"_id,omitempty" json:"_id" xml:"_id"`
+    Nombre string ` json:"nombre" xml:"nombre" `
+}
+
+func (c App) Mensaje() revel.Result {
+	session, err := mgo.Dial("192.168.1.34")
+	if err != nil {
+			panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	var results []Clientes
+	bd := session.DB("total_acceso").C("cliente")
+	bd.Find(nil).All(&results)
+    if err != nil {
+        panic(err)
+    }	
+	data := make(map[string]interface{})
+	data["data"]=results
+	data["error"]=nil
+    return c.RenderJson(data)
+}
+func (c App) SaveClient(vp_cliente string) revel.Result {
+	session, err := mgo.Dial("192.168.1.34")
+	if err != nil {
+			panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	bd := session.DB("total_acceso").C("cliente")
+	result := Clientes{}
+	err = bd.Find(bson.M{"nombre": vp_cliente}).One(&result)
+	data := make(map[string]interface{})
+	if result.Nombre!=""{
+		data["status"]=2
+		data["msg"]="El cliente ya existe"
+	} else{
+		err = bd.Insert(&Clientes{Nombre:vp_cliente})
+		if err != nil {
+			data["status"]=3
+			panic(err);
+			data["msg"]=err
+		} else{
+			data["status"]=1
+		}
+	}
+    return c.RenderJson(data)
+}
+
+func (c App) Cliente() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="cliente"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) HistoricoMigraciones() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Historico migraciones"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) EstadisticaMigraciones() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Estadistica migraciones"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+
+
+func (c App) EstadisticaClientes() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Estadistica de clientes"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) PeriocidadMigraciones() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Periocidad de migraciones"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) ExclusionFuentes() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Exclusion de fuentes"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
+func (c App) AsociacionFuentes() revel.Result {
+	var nombre,opcion_seleccionada string
+	nombre =c.Session["UserName"]
+	opcion_seleccionada="Asociacion de fuentes"
+	
+	return c.Render(nombre,opcion_seleccionada)
+}
