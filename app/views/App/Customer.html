@@ -11,15 +11,23 @@ function FindAllCustomer(){
 	   type: 'post',
 	   dataType: 'json',
 	   data : { },
-	   success : function(result) { 
-		 var customer = new Array();
-		 num=0;
-		 $.each(result.data,function(key,fila){
-			 customer[num]=fila.name;
+	   success : function(result) {
+		var customer = new Array();
+		num=0;
+		$.each(result.data,function(key,fila){
+			var obj = new Object();
+			obj.label=fila.name;
+			obj.value=fila._id;
+			 customer[num]=obj;
 			 num++;
-		 });
-			$( "#tags" ).autocomplete({
-				source: customer
+		 });	   
+		  console.log(customer);
+		  $( "#tags" ).autocomplete({
+				source: customer,
+				select: function( event, ui ){
+					alert(ui.item.label);
+					alert(ui.item.value);
+				}							
 			});
 	   },
 	 });
