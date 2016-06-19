@@ -4,7 +4,20 @@
 $(document).ready(function () { 
 	$('#btnsave').click(SaveCustomer);
 	FindAllCustomer();
+$('#txtfirstdate,#txtlastdate').datepicker({
+		altFormat: formatDate,
+		dateFormat: formatDate 
+	});	
 });
+function AddField(){
+	var HTML='';
+	HTML+='<div class="col-md-12">';						
+	HTML+='<div class="input-group">';
+	HTML+='<input type="text" class="form-control" id="exampleInputAmount"><div class="input-group-addon" style="font-size:20px;cursor:pointer;">X</div>';
+	HTML+='</div>';
+	HTML+='</div>';
+	$('#list_conditionals').append(HTML);
+}
 function FindAllCustomer(){
 	 $.ajax({
 	   url: '/Customer/FindAll',
@@ -17,7 +30,8 @@ function FindAllCustomer(){
 		$.each(result.data,function(key,fila){
 			var obj = new Object();
 			obj.label=fila.name;
-			obj.value=fila._id;
+			obj.value=fila.name;
+			obj.id=fila._id;
 			 customer[num]=obj;
 			 num++;
 		 });	   
@@ -25,8 +39,94 @@ function FindAllCustomer(){
 		  $( "#tags" ).autocomplete({
 				source: customer,
 				select: function( event, ui ){
-					alert(ui.item.label);
-					alert(ui.item.value);
+					//alert(ui.item.label);
+					//alert(ui.item.value);
+					/*
+		
+			
+						
+		
+		
+					*/
+					var HTML='';				
+					HTML='<div class="panel panel-default"><div class="panel-heading"><strong>Configurações do cliente</strong></div><div class="panel-body">';
+					HTML+='<div class="row">';
+						HTML+='<div class="col-md-5">';
+						HTML+='<input type="text" id="txtname" name="txtname" class="form-control" value="'+ui.item.id+'">';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-3">';
+						//
+						HTML+='<input type="checkbox">Ativate';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-2">';
+						HTML+='<span class="label label-primary">Fontes Noticiosas</span>';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-2">';
+						HTML+='<select class="form-control" id="cbolang" name="cbolang"><option value="Português">Português</option><option value="Inglês">Inglês</option><option value="Espanhol">Espanhol</option></select>';
+						HTML+='</div>';
+						
+					HTML+='</div></div>';
+					HTML+='<div class="panel-heading"><strong>Período inicial de migração</strong></div><div class="panel-body">';
+					HTML+='<div class="row">';
+					
+						HTML+='<div class="col-md-1">';
+						HTML+='Desde <input type="checkbox">';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-3">';
+						HTML+='<input type="text" id="txtfirstdate" name="txtfirstdate" class="form-control">';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-1">';
+						HTML+='<input type="text" id="txtlastdate" name="txtlastdate" class="form-control">';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-1">';
+						HTML+='Desde <input type="checkbox">';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-3">';
+						HTML+='<input type="text" id="txtname" name="txtname" class="form-control">';
+						HTML+='</div>';
+						
+						HTML+='<div class="col-md-1">';
+						HTML+='<input type="text" id="txtname" name="txtname" class="form-control">';
+						HTML+='</div>';
+
+						HTML+='<div class="col-md-2">';
+						HTML+='<span class="label label-primary" data-toggle="tooltip" data-placement="top" title="As migrações serão continuadas após finalizada a migração inicial. Caso não queira continuar com as migrações subsequentes, basta desativar o cliente">??</span>';
+						HTML+='</div>';
+						
+					HTML+='</div>';					
+					HTML+='</div>';	
+					HTML+='<div class="panel-heading"><strong>expressão de busca</strong></div><div class="panel-body">';
+					HTML+='<div class="row">';					
+						HTML+='<div class="col-md-12">';						
+						HTML+='<input type="checkbox"> Online &nbsp;&nbsp;&nbsp;<input type="checkbox"> Blog &nbsp;&nbsp;&nbsp;<input type="checkbox"> Impresso';
+						HTML+='</div>';
+						HTML+='<div class="col-md-12">';						
+						HTML+='&nbsp;';
+						HTML+='</div>';
+						HTML+='<div id="list_conditionals"></div>';
+						
+						HTML+='<div class="col-md-3">';						
+						HTML+='<input type="text" class="form-control" id="exampleInputAmount" onclick="javascript:AddField();" placeholder="Clique para adicionar expressão de busca">';
+						HTML+='</div>';
+						HTML+='<div class="col-md-8">';						
+						HTML+='&nbsp;';
+						HTML+='</div>';
+						
+
+						
+					HTML+='</div>';					
+					HTML+='</div>';	
+					//
+					HTML+='</div>';	
+					$('#listado').empty().append(HTML);
+					$('[data-toggle="tooltip"]').tooltip();
 				}							
 			});
 	   },
@@ -98,9 +198,11 @@ function SaveCustomer(){
 				<div class="col-md-12">
 					&nbsp;
 				</div>
-			</div>			
+			</div>
+						
 		</div>
 		</div>
+		<div id="listado"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -116,7 +218,8 @@ function SaveCustomer(){
 						<input class="form-control" type="text" id="t_customer" name="t_customer"  />
 					</div>				
 				</div>	
-			</div>		
+			</div>	
+						
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
