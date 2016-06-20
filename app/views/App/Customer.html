@@ -4,11 +4,40 @@
 $(document).ready(function () { 
 	$('#btnsave').click(SaveCustomer);
 	FindAllCustomer();
-$('#txtfirstdate,#txtlastdate').datepicker({
-		altFormat: formatDate,
-		dateFormat: formatDate 
-	});	
+	
 });
+function CheckFirstDate(obj){
+	if(obj.checked){
+		$('#txtfirstdate').attr('readonly',false);
+		$('#txthourfirst').attr('readonly',false);
+		$('#txtfirstdate').datepicker({
+			altFormat: formatDate,
+			dateFormat: formatDate 
+		});		
+	}
+	else{
+		$('#txtfirstdate').attr('readonly',true);
+		$('#txthourfirst').attr('readonly',true);
+		$('#txtfirstdate').datepicker("destroy");
+		$('#txtfirstdate,#txthourfirst').val('');		
+	}
+}
+function CheckLastDate(obj){
+	if(obj.checked){
+		$('#txtlastdate').attr('readonly',false);
+		$('#txtlastHour').attr('readonly',false);
+		$('#txtlastdate').datepicker({
+			altFormat: formatDate,
+			dateFormat: formatDate 
+		});		
+	}
+	else{
+		$('#txtlastdate').attr('readonly',true);
+		$('#txtlastHour').attr('readonly',true);
+		$('#txtlastdate').datepicker("destroy");
+		$('#txtlastdate,#txtlastHour').val('');
+	}
+}
 function AddField(){
 	var HTML='';
 	HTML+='<div class="col-md-12">';						
@@ -39,98 +68,200 @@ function FindAllCustomer(){
 		  $( "#tags" ).autocomplete({
 				source: customer,
 				select: function( event, ui ){
-					//alert(ui.item.label);
-					//alert(ui.item.value);
-					/*
-		
-			
-						
-		
-		
-					*/
-					var HTML='';				
-					HTML='<div class="panel panel-default"><div class="panel-heading"><strong>Configurações do cliente</strong></div><div class="panel-body">';
-					HTML+='<div class="row">';
-						HTML+='<div class="col-md-5">';
-						HTML+='<input type="text" id="txtname" name="txtname" class="form-control" value="'+ui.item.id+'">';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-3">';
-						//
-						HTML+='<input type="checkbox">Ativate';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-2">';
-						HTML+='<span class="label label-primary">Fontes Noticiosas</span>';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-2">';
-						HTML+='<select class="form-control" id="cbolang" name="cbolang"><option value="Português">Português</option><option value="Inglês">Inglês</option><option value="Espanhol">Espanhol</option></select>';
-						HTML+='</div>';
-						
-					HTML+='</div></div>';
-					HTML+='<div class="panel-heading"><strong>Período inicial de migração</strong></div><div class="panel-body">';
-					HTML+='<div class="row">';
-					
-						HTML+='<div class="col-md-1">';
-						HTML+='Desde <input type="checkbox">';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-3">';
-						HTML+='<input type="text" id="txtfirstdate" name="txtfirstdate" class="form-control">';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-1">';
-						HTML+='<input type="text" id="txtlastdate" name="txtlastdate" class="form-control">';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-1">';
-						HTML+='Desde <input type="checkbox">';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-3">';
-						HTML+='<input type="text" id="txtname" name="txtname" class="form-control">';
-						HTML+='</div>';
-						
-						HTML+='<div class="col-md-1">';
-						HTML+='<input type="text" id="txtname" name="txtname" class="form-control">';
-						HTML+='</div>';
-
-						HTML+='<div class="col-md-2">';
-						HTML+='<span class="label label-primary" data-toggle="tooltip" data-placement="top" title="As migrações serão continuadas após finalizada a migração inicial. Caso não queira continuar com as migrações subsequentes, basta desativar o cliente">??</span>';
-						HTML+='</div>';
-						
-					HTML+='</div>';					
-					HTML+='</div>';	
-					HTML+='<div class="panel-heading"><strong>expressão de busca</strong></div><div class="panel-body">';
-					HTML+='<div class="row">';					
-						HTML+='<div class="col-md-12">';						
-						HTML+='<input type="checkbox"> Online &nbsp;&nbsp;&nbsp;<input type="checkbox"> Blog &nbsp;&nbsp;&nbsp;<input type="checkbox"> Impresso';
-						HTML+='</div>';
-						HTML+='<div class="col-md-12">';						
-						HTML+='&nbsp;';
-						HTML+='</div>';
-						HTML+='<div id="list_conditionals"></div>';
-						
-						HTML+='<div class="col-md-3">';						
-						HTML+='<input type="text" class="form-control" id="exampleInputAmount" onclick="javascript:AddField();" placeholder="Clique para adicionar expressão de busca">';
-						HTML+='</div>';
-						HTML+='<div class="col-md-8">';						
-						HTML+='&nbsp;';
-						HTML+='</div>';
-						
-
-						
-					HTML+='</div>';					
-					HTML+='</div>';	
-					//
-					HTML+='</div>';	
-					$('#listado').empty().append(HTML);
-					$('[data-toggle="tooltip"]').tooltip();
+					if($.trim(ui.item.id)!=""){
+						SearchCustomer(ui.item.id);
+					}
 				}							
 			});
 	   },
 	 });
+}
+function SearchCustomer(id){
+ $.ajax({
+	 url:'/Customer/SearchCustomer',
+	 type:'post',
+	 dataType:'json',
+	 data:{ 
+		inputIDCustomer:id
+	 },
+	 beforeSend:function(){
+		 $.blockUI({ message: '<h2> please wait...</h2>' });	
+	 },
+	 error: function(jqXHR, exception) { 
+		 if (jqXHR.status === 0) { 
+			 alert('error direction.'); 
+		 } else if (jqXHR.status == 404) { 
+			 alert('Page not found'); 
+		 } else if (jqXHR.status == 500) { 
+			 alert('Internal error '); 
+		 } else if (exception === 'parsererror') { 
+			 alert('Requested JSON parse failed.'); 
+		 } else if (exception === 'timeout') { 
+			 alert('Error time out.'); 
+		 } else if (exception === 'abort') { 
+			 alert('Query abort.'); 
+		 } else { 
+			 alert('Error: ' + jqXHR.responseText); 
+		 } 
+	 $.unblockUI();
+	 }, 
+	 success:function(result){
+		 if(result.status==1){ 
+			PaintDataCustomer(result.customer);
+		 }
+		 else if(result.status==2){
+			 alert(result.msg);
+		 }
+		 else{
+			 alert("Transaction Problem");
+		 }
+		 $.unblockUI();
+	 }
+ });
+}
+
+function PaintDataCustomer(customer){
+	var HTML='';				
+	HTML='<div class="panel panel-default"><div class="panel-heading"><strong>Configurações do cliente</strong></div><div class="panel-body">';
+	HTML+='<div class="row">';
+		HTML+='<div class="col-md-5">';
+		HTML+='<input type="hidden" id="txtid" name="txtid"  value="'+customer._id+'">';
+		HTML+='<input type="text" id="txtname" name="txtname" class="form-control" value="'+customer.name+'">';
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-3">';
+		//
+		if(customer.ativate==1){
+			HTML+='<input type="checkbox" checked name="chkativate">Ativate';
+		}
+		else{
+			HTML+='<input type="checkbox" name="chkativate">Ativate';
+		}
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-2">';
+		HTML+='<span class="label label-primary">Fontes Noticiosas</span>';
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-2">';
+		HTML+='<select class="form-control" id="cbolang" name="cbolang"><option value="Por">Português</option><option value="En">Inglês</option><option value="Es">Espanhol</option></select>';
+		HTML+='</div>';
+		
+	HTML+='</div></div>';
+	HTML+='<div class="panel-heading"><strong>Período inicial de migração</strong></div><div class="panel-body">';
+	HTML+='<div class="row">';
+	
+		HTML+='<div class="col-md-1">';
+		if(customer.flgfirst!=1){
+			HTML+='Desde <input type="checkbox" name="chkfirstDate" onclick="javascript:CheckFirstDate(this)">';
+		}
+		else{
+			HTML+='Desde <input type="checkbox" name="chkfirstDate" checked onclick="javascript:CheckFirstDate(this)">';
+		}
+		
+		
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-3">';
+		if($.trim(customer.datefirst)==""){
+			HTML+='<input type="text" id="txtfirstdate" name="txtfirstdate" class="form-control">';
+		}
+		else{
+			HTML+='<input type="text" id="txtfirstdate" name="txtfirstdate" class="form-control" value="'+customer.datefirst+'">';
+		}
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-1">';
+		if($.trim(customer.hourfirst)==""){
+			HTML+='<input type="text" id="txthourfirst" class="form-control">';
+		}
+		else{
+			HTML+='<input type="text" id="txthourfirst" class="form-control" value="'+customer.hourfirst+'">';
+		}
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-1">';
+		if(customer.flglast!=1){
+			HTML+='Até <input type="checkbox" name="chklastDate" onclick="javascript:CheckLastDate(this);">';
+		}
+		else{
+			HTML+='Até <input type="checkbox" name="chklastDate" checked onclick="javascript:CheckLastDate(this);">';
+		}
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-3">';
+		if($.trim(customer.datelast)==""){
+			HTML+='<input type="text" id="txtlastdate" name="txtlastdate" readonly="yes" class="form-control">';
+		}
+		else{
+			HTML+='<input type="text" id="txtlastdate" name="txtlastdate" readonly="yes" class="form-control" value="'+customer.datelast+'">';
+		}
+		HTML+='</div>';
+		
+		HTML+='<div class="col-md-1">';
+		if($.trim(customer.hourlast)==""){
+			HTML+='<input type="text" id="txtlastHour" name="txtlastHour" readonly="yes" class="form-control">';
+		}
+		else{
+			HTML+='<input type="text" id="txtlastHour" name="txtlastHour" readonly="yes" class="form-control" value="'+customer.hourlast+'">';
+		}
+		HTML+='</div>';
+
+		HTML+='<div class="col-md-2">';
+		HTML+='<span class="label label-primary" data-toggle="tooltip" data-placement="top" title="As migrações serão continuadas após finalizada a migração inicial. Caso não queira continuar com as migrações subsequentes, basta desativar o cliente">??</span>';
+		HTML+='</div>';
+		
+	HTML+='</div>';					
+	HTML+='</div>';	
+	HTML+='<div class="panel-heading"><strong>expressão de busca</strong></div><div class="panel-body">';
+	HTML+='<div class="row">';					
+		HTML+='<div class="col-md-12">';
+		if(customer.flgonline==0){
+			HTML+='<input type="checkbox" name="chkonline"> Online &nbsp;&nbsp;&nbsp;';
+		}
+		else{
+			HTML+='<input type="checkbox" checked name="chkonline"> Online &nbsp;&nbsp;&nbsp;';
+		}
+		if(customer.flgblog==0){
+			HTML+='<input type="checkbox" name="chkblog"> Blog &nbsp;&nbsp;&nbsp;';
+		}
+		else{
+			HTML+='<input type="checkbox" checked name="chkblog"> Blog &nbsp;&nbsp;&nbsp;';
+		}
+		if(customer.flgimpresso==0){
+			HTML+='<input type="checkbox" name="chkimpresso"> Impresso';
+		}
+		else{
+			HTML+='<input type="checkbox" checked name="chkimpresso"> Impresso';
+		}
+		
+		
+		HTML+='</div>';
+		HTML+='<div class="col-md-12">';						
+		HTML+='&nbsp;';
+		HTML+='</div>';
+		HTML+='<div id="list_conditionals"></div>';
+		
+		HTML+='<div class="col-md-3">';						
+		HTML+='<input type="text" class="form-control" id="exampleInputAmount" onclick="javascript:AddField();" placeholder="Clique para adicionar expressão de busca">';
+		HTML+='</div>';
+		HTML+='<div class="col-md-8">';						
+		HTML+='&nbsp;';
+		HTML+='</div>';
+		
+
+		
+	HTML+='</div>';					
+	HTML+='</div>';	
+	//
+	HTML+='</div>';	
+	$('#listado').empty().append(HTML);
+	$('[data-toggle="tooltip"]').tooltip();
+	$('#txtfirstdate').datepicker({
+		altFormat: formatDate,
+		dateFormat: formatDate 
+	});
+	$("#cbolang").val(customer.lang);
 }
 function SaveCustomer(){
 	if($.trim($('#t_customer').val())==""){
@@ -180,6 +311,90 @@ function SaveCustomer(){
 	 }
  });
 }
+function SaveAllCustomer(){
+	if($.trim($('#txtname').val())==""){
+		alert("Input the customer");
+		return;
+	}	
+	ativate=0;
+	if(document.getElementsByName("chkativate")[0].checked){
+		ativate=1;
+	}	
+	flgfirst=0;
+	if(document.getElementsByName("chkfirstDate")[0].checked){
+		flgfirst=1;
+	}
+	flglast=0;
+	if(document.getElementsByName("chklastDate")[0].checked){
+		flglast=1;
+	}
+	
+	flgonline=0;
+	if(document.getElementsByName("chkonline")[0].checked){
+		flgonline=1;
+	}
+	flgblog=0;
+	if(document.getElementsByName("chkblog")[0].checked){
+		flgblog=1;
+	}
+	flgimpresso=0;
+	if(document.getElementsByName("chkimpresso")[0].checked){
+		flgimpresso=1;
+	}
+	
+ $.ajax({
+	 url:'/Customer/Update',
+	 type:'post',
+	 dataType:'json',
+	 data:{ 
+		vp_name:$('#txtname').val(),
+		vp_ativate:ativate,
+		vp_lang:$('#cbolang').val(),
+		vp_flgfirst:flgfirst,
+		vp_datefirst:$('#txtfirstdate').val(),
+		vp_hourfirst:$('#txthourfirst').val(),
+		vp_flglast:flglast,
+		vp_datelast:$('#txtlastdate').val(),
+		vp_hourlast:$('#txtlastHour').val(),
+		vp_flgonline:flgonline,
+		vp_flgblog:flgblog,
+		vp_flgimpresso:flgimpresso
+	 },
+	 beforeSend:function(){
+		 $.blockUI({ message: '<h2> please wait...</h2>' });	
+	 },
+	 error: function(jqXHR, exception) { 
+		 if (jqXHR.status === 0) { 
+			 alert('error direction.'); 
+		 } else if (jqXHR.status == 404) { 
+			 alert('Page not found'); 
+		 } else if (jqXHR.status == 500) { 
+			 alert('Internal error '); 
+		 } else if (exception === 'parsererror') { 
+			 alert('Requested JSON parse failed.'); 
+		 } else if (exception === 'timeout') { 
+			 alert('Error time out.'); 
+		 } else if (exception === 'abort') { 
+			 alert('Query abort.'); 
+		 } else { 
+			 alert('Error: ' + jqXHR.responseText); 
+		 } 
+	 $.unblockUI();
+	 }, 
+	 success:function(result){
+		 if(result.status==1){ 
+			alert("update success");
+		 }
+		 else if(result.status==2){
+			 alert(result.msg);
+		 }
+		 else{
+			 alert("Transaction Problem");
+		 }
+		 $.unblockUI();
+	 }
+ });
+}
 </script>`
 		<div class="panel panel-default">
 		<div class="panel-heading">
@@ -190,8 +405,11 @@ function SaveCustomer(){
 				<div class="col-md-8">
 					<input id="tags" name="tags" class="form-control" placeholder="Pesquisar..">
 				</div>					
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<input type="button" class="btn btn-primary" id="btnbuscar" value="Adicionar cliente" data-toggle="modal" data-target="#myModal" />
+				</div>
+				<div class="col-md-2">
+					<input type="button" class="btn btn-primary" id="btnsaveall" onclick="javascript:SaveAllCustomer()" value="Salvar tudo" />
 				</div>
 			</div>
 			<div class="row">
