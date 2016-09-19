@@ -1,0 +1,54 @@
+{{template "header.html" .}}
+<script type="text/javascript" language="javascript" src="/public/js/concurrence/frm_adm_concurrence.js"></script>
+<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Mantenimiento</strong>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" id="t_codigo" value="{{.concurrence.ID}}" /> 
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="start">Start</label>
+<input type="text" id="t_start" name="t_start" class="form-control" value="{{.concurrence.Start}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="end">End</label>
+<input type="text" id="t_end" name="t_end" class="form-control" value="{{.concurrence.End}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="concurre">Concurrence</label>
+<input type="text" id="t_concurre" class="form-control" name="t_concurre" value="{{.concurrence.Concurre}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+			</div>
+		</div>
+	{{template "footer.html" .}}

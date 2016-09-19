@@ -1,0 +1,215 @@
+{{template "header.html" .}}
+<script type="text/javascript" language="javascript" src="/public/js/channel/FrmChannel.js"></script>
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>List Channel </strong>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2">
+						<label for="idempresa">Customer</label>
+					</div>
+					<div class="col-md-4">
+						<input class="form-control" type="text" id="t_idempresa" value="{{.customers.Razonsocial}}" name="t_idempresa"  />					
+						<input type="hidden" id="t_idempresacod" value="{{.cod_empresa}}" name="t_idempresacod"  />					
+					</div>
+					<div class="col-md-6">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<!--<input type="button" class="btn btn-primary" id="btnsearch" value="Search" />&nbsp;&nbsp;-->
+						<input type="button" class="btn btn-primary" id="btnnew" value="New Channel" data-toggle="modal" data-target="#myModal" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div id="list"></div>
+					</div>
+					<div class="col-md-4">
+						<div id="listsubchannel"></div>
+					</div>
+					<div class="col-md-4">
+						<div id="listwords"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Register Channel</h4>
+      </div>
+      <div class="modal-body">
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal">Channel<span style="color:red;">*</span></label>
+						<input class="form-control" type="text" id="t_canal" name="t_canal"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_ordem">Order<span style="color:red;">*</span></label>
+						<input class="form-control" type="text" id="t_ordem" name="t_ordem"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_background_color">Background color</label>
+						<input class="form-control" type="text" id="t_canal_background_color" name="t_canal_background_color"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_font_family">Font family</label>
+						<input class="form-control" type="text" id="t_canal_font_family" name="t_canal_font_family"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_color">Color</label>
+						<input class="form-control" type="text" id="t_canal_color" name="t_canal_color"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_font_size">Font size</label>
+						<input class="form-control" type="text" id="t_canal_font_size" name="t_canal_font_size"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_text_align">Text align</label>
+						<input class="form-control" type="text" id="t_canal_text_align" name="t_canal_text_align"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_font_weigh">Font weight</label>
+						<input class="form-control" type="text" id="t_canal_font_weigh" name="t_canal_font_weigh"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_canal_font_negrito">Font negrito</label>
+						<input class="form-control" type="text" id="t_canal_font_negrito" name="t_canal_font_negrito"  />
+					</div>				
+				</div>	
+			</div>
+			
+
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" id="btnsave" class="btn btn-primary">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModalSubchannel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Register SubChannel</h4>
+      </div>
+      <div class="modal-body">
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_subcanal">SubChannel<span style="color:red;">*</span></label>
+						<input class="form-control" type="text" id="t_subcanal" name="t_subcanal"  />
+						<input type="hidden" id="t_canalcod" name="t_canalcod"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_ordemsubchannel">Order<span style="color:red;">*</span></label>
+						<input class="form-control" type="text" id="t_ordemsubchannel" name="t_ordemsubchannel"  />
+					</div>				
+				</div>	
+			</div>
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_ordem">Det. SubChannel</label>
+						<textarea class="form-control" id="t_detsubcanal" name="t_detsubcanal"></textarea>
+					</div>				
+				</div>	
+			</div>			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" id="btnsavesubchannel" class="btn btn-primary">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModalWord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Register Word</h4>
+      </div>
+      <div class="modal-body">
+			<div class="row">			
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="t_palavrachave">Word<span style="color:red;">*</span></label>
+						<input class="form-control" type="text" id="t_palavrachave" name="t_palavrachave"  />
+						<input type="hidden" id="t_subchannelcod" name="t_subchannelcod"  />
+					</div>				
+				</div>	
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" id="btnsaveword" class="btn btn-primary">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+	{{template "footer.html" .}}

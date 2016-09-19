@@ -1,0 +1,414 @@
+{{template "header.html" .}}
+		<script type="text/javascript" language="javascript" src="/public/js/order_service/Frm_MantOrderService.js"></script> 
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Order Service</strong>
+			</div>
+			<div class="panel-body">
+			<div id="content">
+			<form id="frmos">
+				<input type="hidden" id="t_codigo" value="{{.orderservice.ID}}" /> 
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="id_customer">Customer<span style="color:red;">*</span></label>
+							<input type="text" id="t_id_customer" class="form-control" name="t_id_customer" value=""  />
+							<input type="hidden" id="t_id_customer_cod" class="form-control" name="t_id_customer_cod" value=""  />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="comer_send">Comer send</label>
+							<input type="text" id="t_comer_send" class="form-control" name="t_comer_send" value="{{.orderservice.Comer_send}}"  />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">		
+							{{if .orderservice.Flg_test}}		
+							<input name="chk_flg_test"  type="checkbox" checked />Test
+							{{else}}
+							<input name="chk_flg_test"  type="checkbox" />Test
+							{{end}}
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">							
+							{{if .orderservice.Flg_job}}
+							<input name="chk_flg_job"  type="checkbox" checked />Job
+							{{else}}
+							<input name="chk_flg_job"  type="checkbox" />Job
+							{{end}}
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">	
+							{{if .orderservice.Flg_cliente}}							
+							<input name="chk_flg_cliente"  type="checkbox" checked />Cliente
+							{{else}}
+							<input name="chk_flg_cliente"  type="checkbox" />Cliente
+							{{end}}
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="t_enviada_em">Enviada EM<span style="color:red;">*</span></label>
+							<input type="text" id="t_enviada_em" readonly="yes" class="form-control" name="t_enviada_em" value="{{.orderservice.EnviadaEM}}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="t_enviada_comercial">Enviada Comercial</label>
+							<input type="text" id="t_enviada_comercial" class="form-control" name="t_enviada_comercial"  value="{{.orderservice.EnviadaCom}}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="t_p_gerencia">P Gerencia</label>
+							<input type="text" id="t_p_gerencia" name="t_p_gerencia" class="form-control" value="{{.orderservice.P_Gerencia}}" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="name_fantasy">Name fantasy</label>
+							<input type="text" id="t_name_fantasy" class="form-control" name="t_name_fantasy" value="{{.orderservice.Name_fantasy}}"  />
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="date_send">Date send<span style="color:red;">*</span></label>
+							<input type="text" id="t_date_send" class="form-control" name="t_date_send" readonly="yes" value="{{.orderservice.Date_send}}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="start">Start</label>
+							<input type="text" id="t_start" class="form-control" name="t_start" readonly="yes" value="{{.orderservice.Start}}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="end">End</label>
+							<input type="text" id="t_end" name="t_end" class="form-control" readonly="yes" value="{{.orderservice.End}}" />
+						</div>
+					</div>
+				</div>
+				<!--<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="start">Start</label>
+							<input type="text" id="t_start" class="form-control" name="t_start" readonly="yes" value="{{.orderservice.Start}}" />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="end">End</label>
+							<input type="text" id="t_end" name="t_end" class="form-control" readonly="yes" value="{{.orderservice.End}}" />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>-->
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="clipping_first">Clipping first</label>
+							<input type="text" id="t_clipping_first" name="t_clipping_first" class="form-control" readonly="yes" value="{{.orderservice.Clipping_first}}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="hour_send">Hour send</label>
+							<input type="text" id="t_hour_send" name="t_hour_send" class="form-control" value="{{.orderservice.Hour_send}}"  />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="period_send">Period send</label>
+							<select id="cbo_period_send" class="form-control" name="cbo_period_send"><option value="Semanal">Semanal</option><option value="Mensal">Mensal</option></select>
+						</div>
+					</div>
+				</div>
+				<!--<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="hour_send">Hour send</label>
+							<input type="text" id="t_hour_send" name="t_hour_send" class="form-control" value="{{.orderservice.Hour_send}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="period_send">Period send</label>
+							<select id="cbo_period_send" class="form-control" name="cbo_period_send"><option value="Semanal">Semanal</option><option value="Mensal">Mensal</option></select>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>-->
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">		
+							{{if .orderservice.Sendrelatorio}}	
+							<input name="chk_sendrelatorio"  type="checkbox" checked />Send relatorio
+							{{else}}
+							<input name="chk_sendrelatorio"  type="checkbox" />Send relatorio
+							{{end}}							
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">							
+							{{if .orderservice.Cm2}}
+							<input name="chk_cm2"  type="checkbox" checked />Cm2
+							{{else}}
+							<input name="chk_cm2"  type="checkbox" />Cm2
+							{{end}}							
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">			
+							{{if .orderservice.Valorac}}	
+							<input name="chk_valorac"  type="checkbox" checked />Valorac
+							{{else}}
+							<input name="chk_valorac"  type="checkbox" />Valorac
+							{{end}}							
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">	
+							{{if .orderservice.Audencia}}	
+							<input name="chk_audencia"  type="checkbox" checked />Audencia
+							{{else}}
+							<input name="chk_audencia"  type="checkbox" />Audencia
+							{{end}}
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">							
+							{{if .orderservice.Sendcd}}
+							<input name="chk_sendcd"  type="checkbox" checked />Send CD
+							{{else}}
+							<input name="chk_sendcd"  type="checkbox" />Send CD
+							{{end}}
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">	
+							{{if .orderservice.Mailsaccess}}	
+							<input name="chk_mailsaccess"  type="checkbox" checked />Mail Acces
+							{{else}}
+							<input name="chk_mailsaccess"  type="checkbox" />Mail Acces
+							{{end}}							
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">		
+							{{if .orderservice.Mailperson}}							
+							<input name="chk_mailperson"  type="checkbox" checked />Mail Person
+							{{else}}
+							<input name="chk_mailperson"  type="checkbox" />Mail Acces
+							{{end}}														
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">							
+							{{if .orderservice.Resum}}	
+							<input name="chk_resum"  type="checkbox" checked />Resum
+							{{else}}
+							<input name="chk_resum"  type="checkbox" />Resum
+							{{end}}	
+							</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="checkbox-inline">							
+							&nbsp;
+							</label>
+							<label class="checkbox-inline">	
+							{{if .orderservice.Grifo}}
+							<input name="chk_grifo"  type="checkbox" checked />Grifo
+							{{else}}
+							<input name="chk_grifo"  type="checkbox" />Grifo
+							{{end}}	
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="obs">Obs</label>
+							<textarea  id="t_obs" class="form-control" name="t_obs" >{{.orderservice.Obs}}</textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="padding:15px 15px">
+				
+					<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+						<li class="active"><a href="#red" data-toggle="tab">Search Media</a></li>
+						<li><a href="#orange" data-toggle="tab">Key word</a></li>						
+						<li><a href="#contactos" data-toggle="tab">Contacts</a></li>
+					</ul>
+					
+					<div id="my-tab-content" class="tab-content">					
+						<div class="tab-pane active" id="red">
+						<div class="row">
+							<div class="col-md-12">
+							&nbsp;
+							</div>
+						</div>
+						
+						</div>
+						<div class="tab-pane" id="orange">
+							<div class="row">
+								<div class="col-md-12">
+								&nbsp;
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+								Channel
+								</div>
+								<div class="col-md-5">
+								<select id="cbochannel" class="form-control" onchange="Frm_MantOrderService.FillSubChannel(this.value)"><option>SELECT CUSTOMER</option></select>
+								</div>
+								<div class="col-md-1">
+								Subchannel
+								</div>
+								<div class="col-md-5">
+								<select id="cbosubchannel" class="form-control" onchange="Frm_MantOrderService.FillWord(this.value)"><option value="0">&nbsp;</option></select>
+								</div>
+							</div>
+							<div class="row" id="lstkeywork">
+							
+							</div>
+							<div class="row">
+								<!--<div class="col-md-12" id="lstkeywork">								
+								</div>-->
+								<div class="col-md-12">
+								<div id="lstworks">
+								{{if .orderword}}
+								 {{range .orderword}}
+								<div class="col-md-2 crite" >
+								<input type='hidden' name='subchannel' value='{{.Id_Subchannel}}'><input type='text' name='labelwork' class='form-control' value='' readonly='true' style='background-color:silver;' />
+								</div>
+								<div class="col-md-10 crite">
+								<div class="input-group">
+								<input type="text" data-word-code="" class="form-control" style="z-index:1" value="{{.Word}}" name="txtwork"><div onclick="Frm_MantOrderService.RmvCriterial('crite')" class="input-group-addon" style="font-size:20px;cursor:pointer;">X</div>
+								</div>
+								</div>
+								 {{end}}
+								{{end}}
+								
+								</div>
+								<br>
+								<br>
+								<input type="text" placeholder="click for add search expression" class="form-control" onclick="Frm_MantOrderService.AddExpression()" name="txtnewwork" />
+								</div>
+							</div>
+						</div>	
+					<div class="tab-pane active" id="contactos">
+							<div class="row">
+								<div class="col-md-12">
+								<div id="lstcontacts">
+								</div>
+								<br>
+								<br>
+								<input type="text" placeholder="click for add contact" class="form-control" onclick="Frm_MantOrderService.AddContact()" name="txtnewcontact" />
+								</div>
+							</div>
+						
+						</div>
+					</div>
+					
+					
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+				<div id="results" />
+				</form>
+			</div>		
+			</div>
+		</div>
+	{{template "footer.html" .}}

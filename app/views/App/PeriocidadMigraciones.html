@@ -1,15 +1,29 @@
 {{set . "title" "Respuesta"}}
 {{template "header.html" .}}
-
-<header class="hero-unit" style="background-color:#A9F16C">
-  <div class="container">
-    <div class="row">
-      <div class="hero-text">
-        <h1>Pagina cliente, mi usuario es {{.nombre}}</h1>
-        <p></p>
-      </div>
-    </div>
-  </div>
-</header>
+<script type="text/javascript" language="javascript" src="/public/js/concurrence/frm_list_ocurrence.js">
+	</script>
+<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Periocidad  Migrações</strong>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-12">
+						<input type="button" class="btn btn-primary" id="btnnew" value="New" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div id="list"></div>
+			</div>
+		</div>
 
 {{template "footer.html" .}}

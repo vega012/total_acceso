@@ -1,0 +1,54 @@
+{{template "header.html" .}}
+		<script type="text/javascript" language="javascript" src="/public/js/midia/FrmMantMedia.js"></script> 
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong></strong>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" id="t_codigo" value="{{.midia.ID}}" /> 
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="midia">Media<span style="color:red;">*</span></label>
+							<input class="form-control" type="text" id="t_midia" name="t_midia" value="{{.midia.Midia}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="icone">Icon</label>
+							<input class="form-control" type="text" id="t_icone" name="t_icone" value="{{.midia.Icone}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="tipo">Type</label>
+							<input type="text" class="form-control" id="t_tipo" name="t_tipo" value="{{.midia.Tipo}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+			</div>
+		</div>
+	{{template "footer.html" .}}	

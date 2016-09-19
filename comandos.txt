@@ -13,3 +13,9 @@ creamos carpeta para la bd
 sudo mkdir -p /data/db
 configuramos para que sea la que esta por defecto
 ------------------------------configuracion revel------------------------------------------------------------
+
+# Backup the training database
+mongodump --db training
+
+# Restore the training database to a new database called training2
+mongorestore --db training2 dump/training

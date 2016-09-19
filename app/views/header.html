@@ -1,26 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<!--<meta charset="utf-8">-->
-		<title>Sistema de administración SEMUGS</title>
-		<meta name="description" content="www.salvadorvegareyes.com">
-		<meta name="author" content="Salvador vega reyes">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-		<script src="/public/dashboard/plugins/jquery/jquery.min.js"></script>
-		<script src="/public/dashboard/plugins/jquery-ui/jquery-ui.min.js"></script>
-		<link href="/public/dashboard/plugins/bootstrap/bootstrap.css" rel="stylesheet">
-		<link href="/public/dashboard/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
-		<link href="/public/dashboard/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
-		<link href="/public/dashboard/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
-		<link href="/public/dashboard/plugins/xcharts/xcharts.min.css" rel="stylesheet">
-		<link href="/public/dashboard/plugins/select2/select2.css" rel="stylesheet">
-		<link href="/public/dashboard/plugins/justified-gallery/justifiedGallery.css" rel="stylesheet">
-		<link href="/public/dashboard/css/style_v1.css" rel="stylesheet">
-		<link href="/public/dashboard/plugins/chartist/chartist.min.css" rel="stylesheet">
-	<script src="/public/helpers/jquery/jquery-ui-bootstrap-jquery-ui-bootstrap-71f2e47/js/globals.js"></script>
+<!doctype html>
+<!--[if lt IE 8]><html class="no-js lt-ie8"> <![endif]-->
+<html class="no-js">
+<head>
+        <meta charset="utf-8">
+        <title>Total Acesso</title>
+        <!-- Mobile specific metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 user-scalable=no">
+        <!-- Force IE9 to render in normal mode -->
+        <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+        <meta name="author" content="Total Acesso" />
+        <meta name="description" content="Total Acesso" />
+        <meta name="keywords" content="Total Acesso" />
+        <meta name="application-name" content="" />
+		<!-- Javascripts -->
+        <!-- Load pace first -->
+		<script src="/public/dashboard_/plugins/jquery/jquery.min.js"></script>
+		<script src="/public/dashboard_/plugins/jquery-ui/jquery-ui.min.js"></script>
+		
+		<link href="/public/dashboard_/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+        <!--<script src="/public/dashboard/dynamic/plugins/core/pace/pace.min.js"></script>
+        
+        <script src="/public/jquery/jquery-2.1.1.min.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="/public/dashboard/dynamic/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        </script>
+        <script src="/public/jquery/ui/1.10.4/jquery-ui.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="/public/dashboard/dynamic/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        </script>-->
+        <!-- Import google fonts - Heading first/ text second -->
+        <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,700' rel='stylesheet' type='text/css'>
+        <!-- Css files -->
+        <!-- Icons -->
+        <link href="/public/dashboard/dynamic/css/icons.css" rel="stylesheet" />
+        <!-- Bootstrap stylesheets (included template modifications) -->
+        <link href="/public/dashboard/dynamic/css/bootstrap.css" rel="stylesheet" />
+        <!-- Plugins stylesheets (all plugin custom css) -->
+        <link href="/public/dashboard/dynamic/css/plugins.css" rel="stylesheet" />
+        <!-- Main stylesheets (template main css file) -->
+        <link href="/public/dashboard/dynamic/css/main.css" rel="stylesheet" />
+        <!-- Custom stylesheets ( Put your own changes here ) -->
+        <link href="/public/dashboard/dynamic/css/custom.css" rel="stylesheet" />
+        <!-- Fav and touch icons -->
+        <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="icon" href="img/ico/favicon.ico" type="image/png">-->
+        <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+        <meta name="msapplication-TileColor" content="#3399cc" />
+		<script src="/public/helpers/jquery/jquery-ui-bootstrap-jquery-ui-bootstrap-71f2e47/js/globals.js"></script>
 	<script src="/public/helpers/jquery/jquery-ui-bootstrap-jquery-ui-bootstrap-71f2e47/js/jquery.ui.block.js"></script>
 	<!--datatables-->
 	<link rel="stylesheet" type="text/css" href="/public/helpers/plugin/DataTables-1.10.10/media/css/dataTables.bootstrap.css">
@@ -32,144 +61,170 @@
 	</script>
 	<script type="text/javascript" language="javascript" src="/public/helpers/plugin/DataTables-1.10.10/resources/syntax/shCore.js">
 	</script>
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-				<script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
-				<script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
-		<![endif]-->
-	</head>
-<body>
-<!--Start Header-->
-<div id="screensaver">
-	<canvas id="canvas"></canvas>
-	<i class="fa fa-lock" id="screen_unlock"></i>
-</div>
-<div id="modalbox">
-	<div class="devoops-modal">
-		<div class="devoops-modal-header">
-			<div class="modal-header-name">
-				<span>Basic table</span>
-			</div>
-			<div class="box-icons">
-				<a class="close-link">
-					<i class="fa fa-times"></i>
-				</a>
-			</div>
-		</div>
-		<div class="devoops-modal-inner">
-		</div>
-		<div class="devoops-modal-bottom">
-		</div>
-	</div>
-</div>
-<header class="navbar">
-	<div class="container-fluid expanded-panel">
-		<div class="row">
-			<div id="logo" class="col-xs-12 col-sm-2">
-				<a href="#"><img src="/public/helpers/images/logo.png" style="width:100%;height:45px;" /></a>
-			</div>
-			<div id="top-panel" class="col-xs-12 col-sm-10">
-				<div class="row">
-					<div class="col-xs-8 col-sm-4">
-						<div id="search">
-							<input type="text" placeholder="search"/>
-							<i class="fa fa-search"></i>
-						</div>
-					</div>
-					<div class="col-xs-4 col-sm-8 top-panel-right">
-						<ul class="nav navbar-nav pull-right panel-menu">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
-									<div class="avatar">
-										<img src="/public/dashboard/img/avatar.jpg" class="img-circle" alt="avatar" />
-									</div>
-									<i class="fa fa-angle-down pull-right"></i>
-									<div class="user-mini pull-right">
-										<span class="welcome">Bienvenido,</span>
-										<span>{{.nombre}}</span>
-									</div>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">
-											<i class="fa fa-power-off"></i>
-											<span>Salir</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
-<!--End Header-->
-<!--Start Container-->
-<div id="main" class="container-fluid">
-	<div class="row">
-		<div id="sidebar-left" class="col-xs-2 col-sm-2">
-			<ul class="nav main-menu">
-				<li>
-					<a href="/App/Customer">
-						<i class="fa fa-user"></i>
-						<span class="hidden-xs">Clientes</span>
-					</a>
-				</li>
-				<li>
-					<a href="/App/HistoricoMigraciones">
-						<i class="fa fa-building-o"></i>
-						<span class="hidden-xs">Histórico das Migrações</span>
-					</a>
-				</li>
-				<li>
-					<a href="/App/EstadisticaMigraciones">
-						<i class="fa fa-dot-circle-o"></i>
-						<span class="hidden-xs">Estatísticas Migrações</span>
-					</a>
-				</li>
-				<li>
-					<a href="/App/EstadisticaClientes">
-						<i class="fa fa-inbox"></i>
-						<span class="hidden-xs">Estatísticas Clientes</span>
-					</a>
-				</li>
-				<li>
-					<a href="/App/PeriocidadMigraciones">
-						<i class="fa fa-calendar-o"></i>
-						<span class="hidden-xs">Periodicidade das Migrações</span>
-					</a>
-				</li>
-				<li>
-					<a href="/App/ExclusionFuentes">
-						<i class="fa fa-calendar-o"></i>
-						<span class="hidden-xs">Exclusão de Fontes</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="/App/AsociacionFuentes">
-						<i class="fa fa-calendar-o"></i>
-						<span class="hidden-xs">Associação entre Fontes</span>
-					</a>
-				</li>
-			
-			</ul>
-		</div>
-		<!--Start Content-->
-		<div id="content" class="col-xs-12 col-sm-10">
-			<div id="ajax-content">
-			<div class="row">
-			
-	<div id="breadcrumb" class="col-xs-12">
-		<a href="#" class="show-sidebar">
-			<i class="fa fa-bars"></i>
-		</a>
-		<ol class="breadcrumb pull-left">
-			<li><a href="#">Inicio</a></li>
-			<li><a href="#">{{.opcion_seleccionada}}</a></li>
-		</ol>
-		
-	</div>
-</div>
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+        <!-- .page-navbar -->
+        <div id="header" class="page-navbar">
+            <!--<!-- .navbar-brand -->
+            <a href="index-2.html" class="navbar-brand hidden-xs hidden-sm">
+                <img src="/public/dashboard/dynamic/img/logo.png" class="logo hidden-xs" style="width:100%;height:100%;">
+                <img src="/public/dashboard/dynamic/img/logo_xs.png" class="logo-sm hidden-lg hidden-md" style="width:100%;height:100%;">
+            </a>
+            <!-- / navbar-brand -->
+            <!-- .no-collapse -->
+            <div id="navbar-no-collapse" class="navbar-no-collapse">
+                <!-- top left nav -->
+                <ul class="nav navbar-nav">
+                    <li class="toggle-sidebar">
+                        <a href="#">
+                            <i class="fa fa-reorder"></i>
+                            <span class="sr-only">Collapse sidebar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class=" tipB">{{.opcion_seleccionada}}</a>
+                    </li>
+                </ul>
+                <!-- / top left nav -->
+                <!-- top right nav -->
+                <ul class="nav navbar-nav navbar-right">                    
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                            <i class="fa fa-cog"></i>
+                            <span class="sr-only">Settings</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-form dynamic-settings right" role="menu">
+                            <li><a href="#" class="dropdown-menu-header">settings</a>
+                            </li>
+                            <li>
+                                <div class="toggle-custom">
+                                    <label class="toggle" data-on="ON" data-off="OFF">
+                                        <input type="checkbox" id="fixed-header-toggle" name="fixed-header-toggle" checked>
+                                        <span class="button-checkbox"></span>
+                                    </label>
+                                    <label for="fixed-header-toggle">Fixed header</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="toggle-custom">
+                                    <label class="toggle" data-on="ON" data-off="OFF">
+                                        <input type="checkbox" id="fixed-left-sidebar" name="fixed-left-sidebar" checked>
+                                        <span class="button-checkbox"></span>
+                                    </label>
+                                    <label for="fixed-left-sidebar">Fixed Left Sidebar</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="toggle-custom">
+                                    <label class="toggle" data-on="ON" data-off="OFF">
+                                        <input type="checkbox" id="fixed-right-sidebar" name="fixed-right-sidebar" checked>
+                                        <span class="button-checkbox"></span>
+                                    </label>
+                                    <label for="fixed-right-sidebar">Fixed Right Sidebar</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-power-off"></i>
+                            <span class="sr-only">Logout</span>
+                        </a>
+                    </li>                    
+                </ul>
+                <!-- / top right nav -->
+            </div>
+            <!-- / collapse -->
+        </div>
+        <!-- / page-navbar -->
+        <!-- #wrapper -->
+        <div id="wrapper">
+            <!-- .page-sidebar -->
+            <aside id="sidebar" class="page-sidebar hidden-md hidden-sm hidden-xs">
+                <!-- Start .sidebar-inner -->
+                <div class="sidebar-inner">
+                    <!-- Start .sidebar-scrollarea -->
+                    <div class="sidebar-scrollarea">
+                        <!--  .sidebar-panel -->
+                        
+                        <!-- / .sidebar-panel -->
+                        <!--<div class="user-info clearfix">
+                            
+							
+                            <span class="name">SuggeElson</span>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-xs"><i class="l-basic-gear"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">settings <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu right" role="menu">
+                                    <li><a href="profile.html"><i class="fa fa-edit"></i>Edit profile</a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-money"></i>Windraws</a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-credit-card"></i>Deposits</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="login.html"><i class="fa fa-power-off"></i>Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>-->
+                        <!--  .sidebar-panel -->
+                        <div class="sidebar-panel">
+                            <h5 class="sidebar-panel-title">Navigation</h5>
+                        </div>
+                        <!--sidebar-panel -->
+                        <!-- .side-nav -->
+                        <div class="side-nav">
+                            <ul class="nav">
+								<li><a href="/Customers/Frm_list_customers"><i class="l-basic-server2"></i><span class="txt">Customers</span></a>
+                                </li>
+                                <li><a href="/App/Customer"><i class="l-basic-server2"></i><span class="txt">Customer config</span></a>
+                                </li>
+								<li><a href="/Orderservice/FrmListOrder"><i class="l-basic-server2"></i><span class="txt">Order Service</span></a>
+                                </li>
+								<li><a href="/App/HistoricoMigraciones"><i class="l-basic-anticlockwise"></i><span class="txt">Histórico Migrações</span></a>
+                                </li>                               
+                                <li>
+                                    <a href="#"><i class="l-ecommerce-graph1"></i> <span class="txt">Estatísticas</span></a>
+                                    <ul class="sub">
+                                        <li><a href="/App/EstadisticaMigraciones"><span class="txt">Migrações</span></a>
+                                        </li>
+                                        <li><a href="/App/EstadisticaClientes"><span class="txt">Clientes</span></a>
+                                        </li>                                        
+                                    </ul>
+                                </li>
+								<li>
+                                    <a href="#"><i class="l-ecommerce-receipt"></i> <span class="txt">Configurações</span></a>
+                                    <ul class="sub"><!--Periodicidade-->
+                                        <li><a href="/App/PeriocidadMigraciones"><span class="txt"> Migrações</span></a>
+                                        </li>
+                                        <li><a href="/App/ExclusionFuentes"><span class="txt">Exclusão de Fontes</span></a>
+                                        </li>  <!--entre-->
+										<li><a href="/App/AsociacionFuentes"><span class="txt">Associação  Fontes</span></a></li>
+										<li><a href="/Midia/ListMidia"><span class="txt">Midia</span></a></li>
+										<li><a href="/Submidia/ListSubmidia"><span class="txt">SubMidia</span></a></li>
+                                    </ul>
+                                </li>
+                                
+							</ul>
+                        </div>
+                        <div class="sidebar-panel" style="text-align:center;background-color:#8AB518;font-weight:bold;">
+                            <h5 class="sidebar-panel-title">{{.nombre}}</h5>
+                        </div>
+                    </div>
+                    <!-- End .sidebar-scrollarea -->
+                </div>
+                <!-- End .sidebar-inner -->
+            </aside>
+            <!-- / page-sidebar -->
+            
+            <!-- .page-content -->
+            <div class="page-content sidebar-page right-sidebar-page clearfix">
+                <!-- .page-content-wrapper -->
+                <div class="page-content-wrapper">
+                    <div class="page-content-inner">

@@ -1,0 +1,118 @@
+{{template "header.html" .}}
+		<script type="text/javascript" language="javascript" src="/public/js/channel/FrmAdmChannel.js"></script> 
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong></strong>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" id="t_codigo" value="{{.channel.ID}}" /> 
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="idempresa">empresa<span style="color:red;">*</span></label>
+<input type="text" id="t_idempresa" name="t_idempresa" value="{{.canal.Idempresa}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal">Channel<span style="color:red;">*</span></label>
+<input type="text" id="t_canal" name="t_canal" value="{{.canal.Canal}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="ordem">Order<span style="color:red;">*</span></label>
+<input type="text" id="t_ordem" name="t_ordem" value="{{.canal.Ordem}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_background_color">Background color</label>
+<input type="text" id="t_canal_background_color" name="t_canal_background_color" value="{{.canal.Canal_background_color}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_font_family">Font family</label>
+<input type="text" id="t_canal_font_family" name="t_canal_font_family" value="{{.canal.Canal_font_family}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_color">Color</label>
+<input type="text" id="t_canal_color" name="t_canal_color" value="{{.canal.Canal_color}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_font_size">Font size</label>
+<input type="text" id="t_canal_font_size" name="t_canal_font_size" value="{{.canal.Canal_font_size}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_text_align">Text_align</label>
+<input type="text" id="t_canal_text_align" name="t_canal_text_align" value="{{.canal.Canal_text_align}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_font_weigh">Font weight</label>
+<input type="text" id="t_canal_font_weigh" name="t_canal_font_weigh" value="{{.canal.Canal_font_weigh}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="canal_font_negrito">Font negrito</label>
+<input type="text" id="t_canal_font_negrito" name="t_canal_font_negrito" value="{{.canal.Canal_font_negrito}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+			</div>
+		</div>
+	</body>
+</html>

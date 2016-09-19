@@ -1,0 +1,77 @@
+{{template "header.html" .}}
+		<script type="text/javascript" language="javascript" src="/public/js/source/FrmMantSource.js"></script> 
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Mantenimiento 1</strong>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" id="t_codigo" value="{{.source.ID}}" /> 
+				<div class="row">
+					<div class="col-md-8">
+					
+						<div class="form-group">
+							<label for="domain">Domain<span style="color:red;">*</span></label>
+							<input type="text" id="t_domain" class="form-control" name="t_domain" value="{{.source.Domain}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="url">Url<span style="color:red;">*</span></label>
+							<input type="text" id="t_url" class="form-control" name="t_url" value="{{.source.Url}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="descrip">Description</label>
+							<input type="text" id="t_descrip" class="form-control" name="t_descrip" value="{{.source.Descrip}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="id_country">Country<span style="color:red;">*</span></label>
+							<select id="cbo_id_country" name="cbo_id_country" class="form-control"></select>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="id_type">Type<span style="color:red;">*</span></label>
+							<select id="cbo_id_type" name="cbo_id_type" class="form-control"></select>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+			</div>
+		</div>
+<script>
+FrmMantSource.FillTypeSource("{{.source.Id_type}}");
+FrmMantSource.FillCountry("{{.source.Id_country}}");
+</script>
+{{template "footer.html" .}}

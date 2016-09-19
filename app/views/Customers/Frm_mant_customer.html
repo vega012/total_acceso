@@ -1,0 +1,90 @@
+{{template "header.html" .}}
+		<script type="text/javascript" language="javascript" src="/public/js/customers/Frm_mant_customer.js"></script> 
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong></strong>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" id="t_codigo" value="{{.customers.ID}}" /> 
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_razonsocial">Cliente<span style="color:red;">*</span></label>
+							<input class="form-control" type="text" id="t_razonsocial" name="t_razonsocial" value="{{.customers.Razonsocial}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_cnpj">CNPJ<span style="color:red;">*</span></label>
+							<input class="form-control" type="text" id="t_cnpj" name="t_cnpj" value="{{.customers.Cnpj}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_end">End</label>
+							<input type="text" class="form-control" id="t_end" name="t_end" readonly="yes" value="{{.customers.End}}" />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_contato">Contato</label>
+							<input type="text" class="form-control" id="t_contato" name="t_contato" value="{{.customers.Contato}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_fone">Fone</label>
+							<input type="text" class="form-control" id="t_fone" name="t_fone" value="{{.customers.Fone}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_email">Email</label>
+							<input type="text" class="form-control" id="t_email" name="t_email" value="{{.customers.Email}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="t_obs">Obs</label>
+							<textarea id="t_obs" class="form-control" name="t_obs">{{.customers.Obs}}</textarea>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+			</div>
+		</div>
+{{template "footer.html" .}}

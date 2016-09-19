@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
     "gopkg.in/mgo.v2/bson"
 	"github.com/revel/revel"
 	"intranet/app/models"
@@ -16,32 +15,33 @@ func (c App) Index() revel.Result {
 	return c.Render()
 }
 
-func (c App) ValidateUser(inputUser string,inputPassword string) revel.Result {
-    c.Validation.Required(inputUser).Message("Input the username!")
-	c.Validation.Required(inputPassword).Message("Input the password!")
-    if c.Validation.HasErrors() {
-        c.Validation.Keep()
-        c.FlashParams()
-        return c.Redirect(App.Index)
-    }
-	
+func (c App) ValidateUser(vp_inputUser string,vp_inputPassword string) revel.Result {	
 	bd := c.MongoDatabase.C("users")
 	result := models.User{}
-	err := bd.Find(bson.M{"log_user": inputUser,"pwd_user":inputPassword}).One(&result)
+	err := bd.Find(bson.M{"log_user": vp_inputUser,"pwd_user":vp_inputPassword}).One(&result)
 	if err != nil {
-			log.Fatal(err)
+			//log.Fatal(err)
 	}
-	//return c.RenderJson(result)
-	var name,option_select string
-	name =result.Name
-	c.Session["UserName"] = result.Name
-	c.Session["LogName"] = result.Log_user
-    c.Session.SetNoExpiration()
-	if(name==""){
+	data := make(map[string]interface{})
+	if(result.Name==""){
+		data["status"]=0
+	}else{
+		c.Session["UserName"] = result.Name
+		c.Session["LogName"] = result.Log_user
+		c.Session.SetNoExpiration()
+		data["status"]=1
+	}
+	return c.RenderJson(data)
+}
+func (c App) HomeUser() revel.Result {
+	var nombre string
+	nombre =c.Session["UserName"]
+	if(nombre!=""){
+		c.RenderArgs["nombre"] =nombre
+		return c.RenderTemplate("App/ValidateUser.html")
+	}else{
 		return c.Redirect(App.Index)
 	}
-	option_select="Home"
-    return c.Render(name,option_select)
 }
 
 func (c App) Customer() revel.Result {

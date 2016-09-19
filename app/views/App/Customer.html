@@ -38,14 +38,105 @@ function CheckLastDate(obj){
 		$('#txtlastdate,#txtlastHour').val('');
 	}
 }
+var num_field=0;
 function AddField(){
 	var HTML='';
-	HTML+='<div class="col-md-12">';						
+	HTML+='<div class="col-md-12" id="row_crite'+num_field+'">';						
 	HTML+='<div class="input-group">';
-	HTML+='<input type="text" class="form-control" id="exampleInputAmount"><div class="input-group-addon" style="font-size:20px;cursor:pointer;">X</div>';
+	HTML+='<input type="text" data-word-code="" onblur="AddCriterial(\'crite'+num_field+'\')" class="form-control" style="z-index:1" id="crite'+num_field+'"><div onclick="RmvCriterial(\'crite'+num_field+'\')" class="input-group-addon" style="font-size:20px;cursor:pointer;">X</div>';
 	HTML+='</div>';
 	HTML+='</div>';
 	$('#list_conditionals').append(HTML);
+	num_field++;
+}
+function RmvCriterial(id){
+	if(id!=""){
+		if(confirm('Confirm remove?')){
+			 $.ajax({
+				 url:'/Customer/RmvWord',
+				 type:'post',
+				 dataType:'json',
+				 data:{
+					vp_id_criterial:$('#'+id).attr("data-word-code")
+				 },
+				 beforeSend:function(){
+					 $('#'+id).attr('disabled',true);
+				 },
+				 error: function(jqXHR, exception) {
+					 if (jqXHR.status === 0) { 
+						 alert('error direction.'); 
+					 } else if (jqXHR.status == 404) { 
+						 alert('Page not found'); 
+					 } else if (jqXHR.status == 500) { 
+						 alert('Internal error '); 
+					 } else if (exception === 'parsererror') { 
+						 alert('Requested JSON parse failed.'); 
+					 } else if (exception === 'timeout') { 
+						 alert('Error time out.'); 
+					 } else if (exception === 'abort') { 
+						 alert('Query abort.'); 
+					 } else { 
+						 alert('Error: ' + jqXHR.responseText); 
+					 } 
+					$('#'+id).attr('disabled',true);
+				 }, 
+				 success:function(result){
+					 if(result.status==1){ 
+						$('#row_'+id).remove();
+					 }
+					 else{
+						 alert("Transaction Problem");
+					 }
+					 //$.unblockUI();
+				 }
+			 });
+		}
+	}
+}
+
+function AddCriterial(id,id_obj){
+	if($.trim($('#'+id).val())!=""){
+ $.ajax({
+	 url:'/Customer/AddWord',
+	 type:'post',
+	 dataType:'json',
+	 data:{ 
+		vp_criterial:$('#'+id).val(),
+		vp_id_obj:id_obj
+	 },
+	 beforeSend:function(){
+		 $('#'+id).attr('disabled',true);
+	 },
+	 error: function(jqXHR, exception) { 
+		 if (jqXHR.status === 0) { 
+			 alert('error direction.'); 
+		 } else if (jqXHR.status == 404) { 
+			 alert('Page not found'); 
+		 } else if (jqXHR.status == 500) { 
+			 alert('Internal error '); 
+		 } else if (exception === 'parsererror') { 
+			 alert('Requested JSON parse failed.'); 
+		 } else if (exception === 'timeout') { 
+			 alert('Error time out.'); 
+		 } else if (exception === 'abort') { 
+			 alert('Query abort.'); 
+		 } else { 
+			 alert('Error: ' + jqXHR.responseText); 
+		 } 
+		$('#'+id).attr('disabled',true);
+	 }, 
+	 success:function(result){
+		 if(result.status==1){ 
+			$('#'+id).attr('disabled',false);
+			$('#'+id).attr('data-word-code',result.code_word);
+		 }
+		 else{
+			 alert("Transaction Problem");
+		 }
+		 //$.unblockUI();
+	 }
+ });
+	}
 }
 function FindAllCustomer(){
 	 $.ajax({
@@ -77,6 +168,7 @@ function FindAllCustomer(){
 	 });
 }
 function SearchCustomer(id){
+num_field=0;
  $.ajax({
 	 url:'/Customer/SearchCustomer',
 	 type:'post',
@@ -108,6 +200,18 @@ function SearchCustomer(id){
 	 success:function(result){
 		 if(result.status==1){ 
 			PaintDataCustomer(result.customer);
+			var HTML='';
+			if(result.count_words>0){
+				$.each(result.words,function(key,row){
+					HTML+='<div class="col-md-12" id="row_crite'+num_field+'">';						
+					HTML+='<div class="input-group">';
+					HTML+='<input type="text" data-word-code="'+row._id+'" value="'+row.description+'" onblur="AddCriterial(\'crite'+num_field+'\',\''+row._id+'\')" class="form-control" style="z-index:1" id="crite'+num_field+'"><div onclick="RmvCriterial(\'crite'+num_field+'\')" class="input-group-addon" style="font-size:20px;cursor:pointer;">X</div>';
+					HTML+='</div>';
+					HTML+='</div>';
+					num_field++;
+				});
+			}
+			$('#list_conditionals').append(HTML);
 		 }
 		 else if(result.status==2){
 			 alert(result.msg);

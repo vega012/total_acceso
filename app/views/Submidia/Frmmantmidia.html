@@ -1,0 +1,48 @@
+{{template "header.html" .}}
+		<script type="text/javascript" language="javascript" src="/public/js/submidia/FrmMantMidia.js"></script> 
+		<div class="row">
+		<div class="col-md-12">
+		&nbsp;
+		</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Managment Submidia</strong>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" id="t_codigo" value="{{.submidia.ID}}" /> 
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="idmidia">Midia<span style="color:red;">*</span></label>
+							<select class="form-control" id="cbo_idmidia" name="cbo_idmidia"></select>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="submidia">SubMidia<span style="color:red;">*</span></label>
+							<input class="form-control" type="text" id="t_submidia" name="t_submidia" value="{{.submidia.Submidia}}"  />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						&nbsp;
+					</div>
+				</div>
+				<input type="button" class="btn btn-primary" id="btnsave" value="Grabar" />&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="btncancel" value="Cancelar" />
+			</div>
+		</div>
+<script>
+FrmMantMidia.FillMedia("{{.submidia.Idmidia}}");
+</script>		
+{{template "footer.html" .}}	
